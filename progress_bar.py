@@ -17,6 +17,7 @@ class Progress:
             self.total_iterations = total_iterations  # Total number of iterations
             self.pbar_length = 40  # Length of the moving line
             self.start_time = time.time()
+            self.previous_time = self.start_time
             self.i = 0
             self.symbol = "-"
         # ANSI escape sequences for neon colors
@@ -24,7 +25,6 @@ class Progress:
         # Simulate the moving line
 
         def update(self,increment):
-            self.i+=increment
             current_color = Progress.neon_colors[self.i % len(Progress.neon_colors)]
             line_progress = int((self.i + 1) / self.total_iterations * self.pbar_length)
             line = current_color + self.symbol * line_progress
@@ -33,9 +33,9 @@ class Progress:
             progress = f'{self.i}/{self.total_iterations}'
 
 
-            elapsed_time = time.time() - self.start_time
+            elapsed_time = time.time() - self.previous_time
             try:
-                speed = f'{float(self.pbar_length) / elapsed_time* 2:.2f} itr/s'
+                speed = f'{1 / elapsed_time:.2f} itr/s'
             except:
                 speed = f'0.00 itr/s'
 
@@ -54,6 +54,8 @@ class Progress:
             sys.stdout.write('\r')
             sys.stdout.write(f'{line} {" " * space_width} {progress} {speed} eta {eta}')
             sys.stdout.flush()
+            self.previous_time = time.time()
+            self.i+=increment
             if(self.i==self.total_iterations):
                 sys.stdout.write('\n')
             
