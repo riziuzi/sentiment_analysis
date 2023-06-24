@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service
 import logging
 from tqdm import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
+from progress_bar import Progress
 
 
 class Scraper:
@@ -21,13 +22,15 @@ class Scraper:
         Runs the web scraper for each URL in the input data and displays a progress bar.
         """
         total_urls = len(self.input_data)
-        with logging_redirect_tqdm() as log:
-            for i in tqdm(range(total_urls), desc="Scraping Progress", unit="URL", ncols=80):
-                url_id, url = self.input_data.iloc[i, 0], self.input_data.iloc[i, 1]
-                heading, text = self.scrape_article(url=url)
-                self.absentee_check(url_id, url, heading, text)
-                self.save_txt(name=url_id, content=f"heading:{heading}\n{self.separator}\ntext:{text}",
-                              path=self.scrapped_data_path)
+        pbar = Progress(total_iterations=total_urls)
+        pbar.start()
+        for i in range(total_urls):
+            url_id, url = self.input_data.iloc[i, 0], self.input_data.iloc[i, 1]
+            heading, text = self.scrape_article(url=url)
+            self.absentee_check(url_id, url, heading, text)
+            self.save_txt(name=url_id, content=f"heading:{heading}\n{self.separator}\ntext:{text}",
+                            path=self.scrapped_data_path)
+            pbar.update(1)
 
     def scrape_article(self, url):
         """

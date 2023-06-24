@@ -5,3 +5,4 @@ test.ipynb
 absentee.xlsx
 .ipynb_checkpoints
 Scrapped_Data
+__pycache__
