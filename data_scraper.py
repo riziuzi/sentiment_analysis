@@ -1,12 +1,7 @@
-from selenium import webdriver
 import pandas as pd
 import os
 import requests
 from bs4 import BeautifulSoup
-from selenium.webdriver.chrome.service import Service
-import logging
-from tqdm import tqdm
-from tqdm.contrib.logging import logging_redirect_tqdm
 from progress_bar import Progress
 
 
