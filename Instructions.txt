@@ -1,0 +1,15 @@
+1) Make sure that MasterDirectory and StopWords folders and Input.xlsx and sentiment_analyzer.py files is in he root directory itself, or you need to set it in the instance of Scraper and SentimentAnalysis classes (Not recommended)
+
+2) pip install -r requirement.txt
+
+3) open the sentiment_analyzer.py file, and just run it, Note: Same outputs, as already given in the link will be regenerated.If  Permission error occurs while running the script, chances are that one of teh .xlsx or .txt file is open, so close it. If possible, delete it, after all it is still going to be again generated.
+
+4) Descriptions:
+
+    a) Output.xlsx - This contains all variables' scores
+    b) absentee.xlsx - This contains all "Not Found" articles
+    c) Scrapped_Data - This folder contains all scrapped data with their Heaidng and Text, separated by ###SEPARATOR### unique string.
+    d) progress_bar.py is for animated status bar, keep it in the root.
+
+Possible Errors:
+    If you are trying to give another set of input, and yuo have not deleted Scrapped_Data folder, then my code is written in such a way that it will for the intigrity between input.xlsx and all other folders and files created by it, then only move to next step. So if you have not deleted the previous Scrapped_Data folder, then you'll be thrown error, as Scrapped_Data will still have previous files, and for sentiment_analyzer, previpus Scrapped_Data will not match new input, hence the error. Solution: Just delete the all outputs, i.e. Scrapped_Data, absentee.xlsx, Output.xlsx
