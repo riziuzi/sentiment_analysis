@@ -30,7 +30,7 @@ class Progress:
             line = current_color + self.symbol * line_progress
 
             # Format progress information
-            progress = f'{self.i}/{self.total_iterations}'
+            progress = f'{self.i+1}/{self.total_iterations}'
 
 
             elapsed_time = time.time() - self.previous_time
@@ -68,8 +68,16 @@ class Progress:
 
 
 if __name__ == '__main__':
-    iterations = 100
+    iterations = 113
     pbar = Progress(total_iterations=iterations)
+    print("\n       Starting process number 001897.kt5\n")
     for i in range(iterations):
         pbar.update(1)
-        time.sleep(0.1)
+        time.sleep(0.2)
+    print("     Success!\n Followup process starts now!")
+    pbar2 = Progress(total_iterations=iterations)
+    for i in range(iterations):
+        pbar2.update(1)
+        time.sleep(0.01)
+        
+    print("\n       Success!\n")

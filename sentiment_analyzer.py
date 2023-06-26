@@ -26,7 +26,7 @@ class Scraper:
         """
         total_urls = len(self.input_data)
         pbar = Progress(total_iterations=total_urls)
-        print("Data scrapping started!")
+        print("\nData scrapping started!")
         pbar.start()
         for i in range(total_urls):
             url_id, url = self.input_data.iloc[i, 0], self.input_data.iloc[i, 1]
@@ -405,9 +405,10 @@ if __name__ == "__main__":
                         'AVG WORD LENGTH': None
                     }
         pbar.update(1)
+        data = {key: pd.to_numeric(value, errors='coerce') if key != 'URL' else value for key, value in data.items()}
         df.loc[len(df)] = data
-            
 
+    
     output_file = 'Output.xlsx'
     df_sorted = df.sort_values("URL_ID")
     df_sorted.to_excel(output_file, index=False)
