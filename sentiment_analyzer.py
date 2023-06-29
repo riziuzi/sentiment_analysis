@@ -15,7 +15,7 @@ class Scraper:
         self.input_data_path = input_data_path
         try:
             self.input_data = pd.read_excel(self.input_data_path)
-        except:
+        except Exception:
             print("Please keep the Input.xlsx file and mention the path (Recommended: Put your Input.xlsx file in root directory)")
             return
         self.make_directory(self.scrapped_data_path)
@@ -209,7 +209,7 @@ class SentimentAnalysis:
         if(self.tokens == None):
             print("first run instance.calculate_polarity_score() if you have not run this earlier")
         else:
-            self.complex_count =  sum(1 for token in self.tokens if len(token) > 2 and token.isalpha() and token.lower() not in set(self.stop_words) and self.count_syllables(token) > 2)
+            self.complex_count = sum(1 for token in self.tokens if len(token) > 2 and token.isalpha() and token.lower() not in set(self.stop_words) and self.count_syllables(token) > 2)
             return self.complex_count
 
     def percentage_of_complex_words_fun(self):
