@@ -36,7 +36,7 @@ class Progress:
             elapsed_time = time.time() - self.previous_time
             try:
                 speed = f'{1 / elapsed_time:.2f} itr/s'
-            except:
+            except Exception:
                 speed = f'0.00 itr/s'
 
             elapsed_time = time.time() - self.start_time
